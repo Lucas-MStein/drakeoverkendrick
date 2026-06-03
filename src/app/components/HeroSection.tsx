@@ -1,4 +1,8 @@
 import { ArrowRight } from "lucide-react";
+import { SpotifyArtistImage } from "./SpotifyArtistImage";
+
+const DRAKE_SPOTIFY_ID = "3TVXtAsR1Inumwj472S9r4";
+const KENDRICK_SPOTIFY_ID = "2YZyLoL8N0Wb9xBt1NhZWg";
 
 export function HeroSection() {
   return (
@@ -52,9 +56,18 @@ export function HeroSection() {
           <div className="relative group">
             <div className="absolute inset-0 bg-gradient-to-br from-[#5BA8E0]/20 to-[#8B7FB8]/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all"></div>
             <div className="relative bg-gradient-to-br from-[#1A1F2E] to-[#0A0E1A] p-6 sm:p-8 rounded-2xl border border-[#5BA8E0]/30">
-              <div className="w-24 h-24 sm:w-32 sm:h-32 mx-auto mb-6 rounded-full bg-gradient-to-br from-[#5BA8E0] to-[#8B7FB8] flex items-center justify-center">
-                <div className="w-20 h-20 sm:w-28 sm:h-28 rounded-full bg-[#0A0E1A] flex items-center justify-center">
-                  <span className="text-4xl sm:text-5xl" aria-hidden="true">🏆</span>
+              <div className="w-24 h-24 sm:w-32 sm:h-32 mx-auto mb-6 rounded-full bg-gradient-to-br from-[#5BA8E0] to-[#8B7FB8] p-[3px] flex items-center justify-center">
+                <div className="w-full h-full rounded-full bg-[#0A0E1A] overflow-hidden flex items-center justify-center">
+                  <SpotifyArtistImage
+                    artistId={DRAKE_SPOTIFY_ID}
+                    alt="Drake"
+                    className="w-full h-full object-cover rounded-full"
+                    fallback={
+                      <span className="text-4xl sm:text-5xl" aria-hidden="true">
+                        🏆
+                      </span>
+                    }
+                  />
                 </div>
               </div>
               <h3 className="text-center mb-2 text-xl sm:text-2xl font-bold">Drake</h3>
@@ -72,9 +85,18 @@ export function HeroSection() {
           <div className="relative group">
             <div className="absolute inset-0 bg-gradient-to-br from-[#C8553D]/10 to-[#C8553D]/5 rounded-2xl blur-xl"></div>
             <div className="relative bg-gradient-to-br from-[#1A1F2E]/80 to-[#0A0E1A]/80 p-6 sm:p-8 rounded-2xl border border-white/10">
-              <div className="w-24 h-24 sm:w-32 sm:h-32 mx-auto mb-6 rounded-full bg-gradient-to-br from-[#C8553D]/50 to-[#C8553D]/30 flex items-center justify-center">
-                <div className="w-20 h-20 sm:w-28 sm:h-28 rounded-full bg-[#0A0E1A] flex items-center justify-center">
-                  <span className="text-4xl sm:text-5xl" aria-hidden="true">📖</span>
+              <div className="w-24 h-24 sm:w-32 sm:h-32 mx-auto mb-6 rounded-full bg-gradient-to-br from-[#C8553D]/50 to-[#C8553D]/30 p-[3px] flex items-center justify-center">
+                <div className="w-full h-full rounded-full bg-[#0A0E1A] overflow-hidden flex items-center justify-center">
+                  <SpotifyArtistImage
+                    artistId={KENDRICK_SPOTIFY_ID}
+                    alt="Kendrick Lamar"
+                    className="w-full h-full object-cover rounded-full"
+                    fallback={
+                      <span className="text-4xl sm:text-5xl" aria-hidden="true">
+                        📖
+                      </span>
+                    }
+                  />
                 </div>
               </div>
               <h3 className="text-center mb-2 text-xl sm:text-2xl font-bold">Kendrick</h3>
