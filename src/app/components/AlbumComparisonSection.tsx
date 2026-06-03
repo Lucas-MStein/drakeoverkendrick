@@ -1,8 +1,11 @@
 import { Star, Radio, MessageSquare, Heart, Headphones } from "lucide-react";
+import { SpotifyImage } from "./SpotifyImage";
 
 type Album = {
   title: string;
   year: string;
+  /** Spotify album ID — used to pull the live cover art via oEmbed */
+  spotifyId: string;
   replayValue: number;
   carTest: number;
   captionPotential: number;
@@ -11,14 +14,59 @@ type Album = {
 };
 
 const drakeAlbums: Album[] = [
-  { title: "Certified Lover Boy", year: "2021", replayValue: 98, carTest: 99, captionPotential: 100, lateNightText: 97, auxSafety: 99 },
-  { title: "Scorpion", year: "2018", replayValue: 97, carTest: 98, captionPotential: 99, lateNightText: 100, auxSafety: 98 },
-  { title: "Views", year: "2016", replayValue: 96, carTest: 97, captionPotential: 98, lateNightText: 99, auxSafety: 97 },
+  {
+    title: "ICEMAN",
+    year: "2026",
+    spotifyId: "0OAv7DCME2AV4q1KPO95HY",
+    replayValue: 99,
+    carTest: 100,
+    captionPotential: 98,
+    lateNightText: 97,
+    auxSafety: 99,
+  },
+  {
+    title: "HABIBTI",
+    year: "2026",
+    spotifyId: "0P6B5R3yRSkhkmequL5Yno",
+    replayValue: 97,
+    carTest: 98,
+    captionPotential: 99,
+    lateNightText: 100,
+    auxSafety: 98,
+  },
+  {
+    title: "MAID OF HONOUR",
+    year: "2026",
+    spotifyId: "71yBvOeRZ9os9LYFEy9eOk",
+    replayValue: 98,
+    carTest: 97,
+    captionPotential: 100,
+    lateNightText: 99,
+    auxSafety: 97,
+  },
 ];
 
 const kendrickAlbums: Album[] = [
-  { title: "Mr. Morale & The Big Steppers", year: "2022", replayValue: 68, carTest: 62, captionPotential: 45, lateNightText: 38, auxSafety: 55 },
-  { title: "DAMN.", year: "2017", replayValue: 71, carTest: 75, captionPotential: 52, lateNightText: 41, auxSafety: 72 },
+  {
+    title: "GNX",
+    year: "2024",
+    spotifyId: "0hvT3yIEysuuvkK73vgdcW",
+    replayValue: 74,
+    carTest: 71,
+    captionPotential: 58,
+    lateNightText: 42,
+    auxSafety: 68,
+  },
+  {
+    title: "Mr. Morale & The Big Steppers",
+    year: "2022",
+    spotifyId: "1atjqOZTCdrjxjMyCPZc2g",
+    replayValue: 68,
+    carTest: 62,
+    captionPotential: 45,
+    lateNightText: 38,
+    auxSafety: 55,
+  },
 ];
 
 const overall = (a: Album) =>
@@ -93,8 +141,18 @@ export function AlbumComparisonSection() {
               <article key={album.title} className="relative group">
                 <div className="absolute inset-0 bg-gradient-to-br from-[#5BA8E0]/20 to-[#8B7FB8]/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all pointer-events-none"></div>
                 <div className="relative bg-gradient-to-br from-[#1A1F2E] to-[#0A0E1A] p-5 sm:p-6 rounded-2xl border border-[#5BA8E0]/30 h-full flex flex-col">
-                  <div className="w-full aspect-square bg-gradient-to-br from-[#5BA8E0] to-[#8B7FB8] rounded-xl mb-4 flex items-center justify-center">
-                    <span className="text-5xl sm:text-6xl" aria-hidden="true">🎵</span>
+                  <div className="w-full aspect-square rounded-xl mb-4 overflow-hidden bg-gradient-to-br from-[#5BA8E0] to-[#8B7FB8] flex items-center justify-center ring-1 ring-white/10 shadow-lg shadow-black/40">
+                    <SpotifyImage
+                      type="album"
+                      id={album.spotifyId}
+                      alt={`${album.title} album cover`}
+                      className="w-full h-full object-cover"
+                      fallback={
+                        <span className="text-5xl sm:text-6xl" aria-hidden="true">
+                          🎵
+                        </span>
+                      }
+                    />
                   </div>
                   <h4 className="mb-1 text-lg sm:text-xl font-bold text-white">{album.title}</h4>
                   <p className="text-white/65 mb-4 text-sm">{album.year}</p>
@@ -125,8 +183,18 @@ export function AlbumComparisonSection() {
                 key={album.title}
                 className="bg-gradient-to-br from-[#1A1F2E]/70 to-[#0A0E1A]/70 p-5 sm:p-6 rounded-2xl border border-white/10 h-full flex flex-col"
               >
-                <div className="w-full aspect-square bg-gradient-to-br from-[#C8553D]/40 to-[#C8553D]/15 rounded-xl mb-4 flex items-center justify-center">
-                  <span className="text-5xl sm:text-6xl" aria-hidden="true">📚</span>
+                <div className="w-full aspect-square rounded-xl mb-4 overflow-hidden bg-gradient-to-br from-[#C8553D]/40 to-[#C8553D]/15 flex items-center justify-center ring-1 ring-white/10 shadow-lg shadow-black/40">
+                  <SpotifyImage
+                    type="album"
+                    id={album.spotifyId}
+                    alt={`${album.title} album cover`}
+                    className="w-full h-full object-cover"
+                    fallback={
+                      <span className="text-5xl sm:text-6xl" aria-hidden="true">
+                        📚
+                      </span>
+                    }
+                  />
                 </div>
                 <h4 className="mb-1 text-lg sm:text-xl font-semibold text-white/90">
                   {album.title}

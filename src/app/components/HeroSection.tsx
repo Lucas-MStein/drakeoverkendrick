@@ -1,5 +1,5 @@
 import { ArrowRight } from "lucide-react";
-import { SpotifyArtistImage } from "./SpotifyArtistImage";
+import { SpotifyImage } from "./SpotifyImage";
 
 const DRAKE_SPOTIFY_ID = "3TVXtAsR1Inumwj472S9r4";
 const KENDRICK_SPOTIFY_ID = "2YZyLoL8N0Wb9xBt1NhZWg";
@@ -58,8 +58,9 @@ export function HeroSection() {
             <div className="relative bg-gradient-to-br from-[#1A1F2E] to-[#0A0E1A] p-6 sm:p-8 rounded-2xl border border-[#5BA8E0]/30">
               <div className="w-24 h-24 sm:w-32 sm:h-32 mx-auto mb-6 rounded-full bg-gradient-to-br from-[#5BA8E0] to-[#8B7FB8] p-[3px] flex items-center justify-center">
                 <div className="w-full h-full rounded-full bg-[#0A0E1A] overflow-hidden flex items-center justify-center">
-                  <SpotifyArtistImage
-                    artistId={DRAKE_SPOTIFY_ID}
+                  <SpotifyImage
+                    type="artist"
+                    id={DRAKE_SPOTIFY_ID}
                     alt="Drake"
                     className="w-full h-full object-cover rounded-full"
                     fallback={
@@ -87,8 +88,9 @@ export function HeroSection() {
             <div className="relative bg-gradient-to-br from-[#1A1F2E]/80 to-[#0A0E1A]/80 p-6 sm:p-8 rounded-2xl border border-white/10">
               <div className="w-24 h-24 sm:w-32 sm:h-32 mx-auto mb-6 rounded-full bg-gradient-to-br from-[#C8553D]/50 to-[#C8553D]/30 p-[3px] flex items-center justify-center">
                 <div className="w-full h-full rounded-full bg-[#0A0E1A] overflow-hidden flex items-center justify-center">
-                  <SpotifyArtistImage
-                    artistId={KENDRICK_SPOTIFY_ID}
+                  <SpotifyImage
+                    type="artist"
+                    id={KENDRICK_SPOTIFY_ID}
                     alt="Kendrick Lamar"
                     className="w-full h-full object-cover rounded-full"
                     fallback={
