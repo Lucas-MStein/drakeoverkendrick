@@ -119,7 +119,7 @@ export function ScoreboardSection() {
                 <p className="mb-2 text-white/70 text-sm uppercase tracking-wider font-semibold">
                   Final Score
                 </p>
-                <p className="text-white/80 text-2xl sm:text-3xl md:text-4xl font-semibold">
+                <p className="text-[#C8553D] text-2xl sm:text-3xl md:text-4xl font-semibold">
                   Very Respectable
                 </p>
                 <p className="mt-2 text-white/55">A truly admirable effort</p>
