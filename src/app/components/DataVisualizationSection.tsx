@@ -49,7 +49,10 @@ const radarData = [
   { metric: "Vibe Energy", Drake: 96, Kendrick: 58 },
 ];
 
-const COLORS_DRAKE = ["#5BA8E0", "#8B7FB8", "#D4AF37", "#4A97CF"];
+// One color per pie slice — kept visually distinct so the legend chips never
+// blend together (the original 4th color #4A97CF was nearly identical to the
+// first blue #5BA8E0, making the legend look duplicated).
+const COLORS_DRAKE = ["#5BA8E0", "#8B7FB8", "#D4AF37", "#E07B9C"];
 
 const tooltipStyle = {
   backgroundColor: "#1A1F2E",
@@ -60,13 +63,54 @@ const tooltipStyle = {
 
 const tickStyle = { fill: "#cbd5e1", fontSize: 12 };
 
+/**
+ * Pushes each PolarAngleAxis label further outward along its own radius so it
+ * doesn't sit on the polygon outline. Recharts' built-in `tickSize` only
+ * controls the tick-mark line, not the label position — this gives us real
+ * spacing without resizing the chart.
+ */
+const renderAngleTick = (props: {
+  payload: { value: string | number };
+  x: number;
+  y: number;
+  cx: number;
+  cy: number;
+  textAnchor?: string;
+}) => {
+  const { payload, x, y, cx, cy, textAnchor } = props;
+  const OFFSET = 18;
+  const dx = x - cx;
+  const dy = y - cy;
+  const dist = Math.hypot(dx, dy) || 1;
+  const scale = (dist + OFFSET) / dist;
+  return (
+    <text
+      x={cx + dx * scale}
+      y={cy + dy * scale}
+      fill="#e2e8f0"
+      fontSize={11}
+      textAnchor={textAnchor}
+      dominantBaseline="central"
+    >
+      {payload.value}
+    </text>
+  );
+};
+
 function ChartCard({
   title,
   caption,
+  chartHeightClass = "h-[260px] sm:h-[300px]",
   children,
 }: {
   title: string;
   caption: string;
+  /**
+   * Tailwind height classes for the chart area. Override for charts that need
+   * extra vertical room for outer labels (e.g. the radar's "Mood Setting" at
+   * the very bottom of the polygon).
+   */
+  chartHeightClass?: string;
   children: React.ReactNode;
 }) {
   return (
@@ -74,7 +118,7 @@ function ChartCard({
       <h3 className="mb-5 md:mb-6 text-lg sm:text-xl md:text-2xl font-semibold text-white leading-snug">
         {title}
       </h3>
-      <div className="w-full h-[260px] sm:h-[300px]">
+      <div className={`w-full ${chartHeightClass}`}>
         <ResponsiveContainer width="100%" height="100%">
           {children as React.ReactElement}
         </ResponsiveContainer>
@@ -173,10 +217,15 @@ export function DataVisualizationSection() {
           <ChartCard
             title="The Vibes-Based Performance Matrix"
             caption="*Scientifically calibrated to personal taste"
+            chartHeightClass="h-[320px] sm:h-[360px]"
           >
             <RadarChart data={radarData} margin={{ top: 8, right: 16, left: 16, bottom: 0 }}>
               <PolarGrid stroke="rgba(255,255,255,0.15)" />
-              <PolarAngleAxis dataKey="metric" stroke="#cbd5e1" tick={{ fill: "#e2e8f0", fontSize: 11 }} />
+              <PolarAngleAxis
+                dataKey="metric"
+                stroke="#cbd5e1"
+                tick={renderAngleTick}
+              />
               <PolarRadiusAxis stroke="rgba(255,255,255,0.3)" tick={{ fill: "#94a3b8", fontSize: 10 }} />
               <Radar name="Drake" dataKey="Drake" stroke="#5BA8E0" fill="#5BA8E0" fillOpacity={0.5} />
               <Radar
@@ -186,7 +235,11 @@ export function DataVisualizationSection() {
                 fill="#C8553D"
                 fillOpacity={0.2}
               />
-              <Legend wrapperStyle={{ color: "#e2e8f0", fontSize: 13 }} />
+              <Legend
+                verticalAlign="bottom"
+                height={26}
+                wrapperStyle={{ color: "#e2e8f0", fontSize: 13, paddingTop: 12 }}
+              />
             </RadarChart>
           </ChartCard>
         </div>
