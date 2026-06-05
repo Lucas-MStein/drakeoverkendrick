@@ -22,7 +22,7 @@ export function HeroSection() {
 
           <h1
             id="hero-title"
-            className="mb-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight break-words"
+            className="mb-6 text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight break-words"
           >
             drakeoverkendrick.com
           </h1>
